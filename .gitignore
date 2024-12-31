@@ -1,0 +1,12 @@
+# ignore token.json .env und credentials.json
+
+# ignore all files in the .env file
+.env
+
+credentials.json
+token.json
+
+/__pycache__/
+
+.venv
+
