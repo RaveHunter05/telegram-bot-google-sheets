@@ -89,7 +89,7 @@ def main():
             #print(f"El cliente {row['name']} no ha pagado los servicios de {row['servicios']} su suscripción vencía el día {row['payment_date']} de este mes.")
             client_message = f"Hola {row['name']}. Este mensaje es para recordarte que tu suscripción a {row['servicios']} venció el día {row['payment_date']} de este mes. Por favor realiza el pago correspondiente para evitar la suspensión de tus servicios. Gracias por tu preferencia."
             formated_whatsapp_client_message = client_message.replace(" ", "%20")
-            current_message = f"El cliente {row['name']} no ha pagado los servicios de {row['servicios']} su suscripción vencía el día {row['payment_date']} de este mes. \n Enviar mensaje: https://wa.me/{row['phone']}?text={formated_whatsapp_client_message}"
+            current_message = f"El cliente {row['name']} no ha pagado los servicios de {row['servicios']} su suscripción vencía el día {row['payment_date']} de este mes. \n Enviar mensaje: https://wa.me/{row['code_country']}{row['phone']}?text={formated_whatsapp_client_message}"
             messages_to_send.append(current_message)
 
 
@@ -97,7 +97,7 @@ def main():
             #print(f"El cliente {row['name']} no ha pagado los servicios de {row['servicios']} su suscripción vencía el día {row['payment_date']} de este mes, por favor retirar.") 
             client_message = f"Hola {row['name']}. Este mensaje es para recordarte que tu suscripción a {row['servicios']} venció el día {row['payment_date']} de este mes. Por favor realiza el pago correspondiente para evitar la suspensión de tus servicios. Gracias por tu preferencia."
             formated_whatsapp_client_message = client_message.replace(" ", "%20")
-            current_message = f"\n\nEl cliente {row['name']} no ha pagado los servicios de {row['servicios']} su suscripción vencía el día {row['payment_date']} de este mes, por favor retirar. \n Enviar mensaje: https://wa.me/{row['phone']}?text={formated_whatsapp_client_message}"
+            current_message = f"\n\nEl cliente {row['name']} no ha pagado los servicios de {row['servicios']} su suscripción vencía el día {row['payment_date']} de este mes, por favor retirar. \n Enviar mensaje: https://wa.me/{row['code_country']}{row['phone']}?text={formated_whatsapp_client_message}"
             messages_to_send.append(current_message)
 
     if len(messages_to_send) > 0:
