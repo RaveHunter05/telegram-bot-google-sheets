@@ -12,7 +12,7 @@ from datetime import datetime
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = "1NIKEZs0EH8RdcP6Au7Y0m65p9yotwho2M9TRpUsyesk"
+SAMPLE_SPREADSHEET_ID = "1zrUSZH-VuAVydWw8iF9kgH2556v9wsPTtijxx0stSDE"
 SAMPLE_RANGE_NAME = "A2:P100"
 
 today_day = datetime.now().day
