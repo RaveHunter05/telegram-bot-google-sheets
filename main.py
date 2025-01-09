@@ -40,9 +40,9 @@ async def command_start_handler(message: Message) -> None:
     # Bot instance: `bot.send_message(chat_id=message.chat.id, ...)`
     await message.answer(f"Hola, {html.bold(message.from_user.full_name)}! \n Bienvenido al bot de cuentas de mercaditonic.com")
 
-@dp.message(Command('listado'))
+@dp.message(Command('deblist'))
 async def list_users(message: Message):
-    messages_to_send = quickstart.main()
+    messages_to_send = quickstart.deb_list()
     if len(messages_to_send) == 0:
         await message.answer("No hay usuarios con pagos pendientes")
 
@@ -50,6 +50,52 @@ async def list_users(message: Message):
         # send message for each message in the list
         for message_to_send in messages_to_send:
             await message.answer(message_to_send)
+
+@dp.message(Command('total_collected'))
+async def total_collected(message: Message):
+    total_collected_value = quickstart.total_collected_month()
+    if total_collected_value == 0:
+        await message.answer("No se ha recaudado dinero este mes")
+    await message.answer(f"Total collected this month: {total_collected_value}")
+
+@dp.message(Command('total_debt'))
+async def total_debt(message: Message):
+    total_debt_value = quickstart.total_debt_month()
+    if total_debt_value == 0:
+        await message.answer("No hay deudas pendientes este mes")
+    await message.answer(f"Total debt this month: {total_debt_value}")
+
+@dp.message(Command('clients_this_week'))
+async def clients_this_week(message: Message):
+    clients_this_week_list = quickstart.list_clients_this_week()
+    if len(clients_this_week_list) == 0:
+        await message.answer("No hay clientes con pagos pendientes esta semana")
+    await message.answer(f"Clientes con pagos pendientes esta semana: {clients_this_week_list}")
+
+@dp.message(Command('weekly_report'))
+async def weekly_report(message: Message):
+    quickly_report_values = quickstart.weekly_report()
+    if quickly_report_values == None or len(quickly_report_values) == 0:
+        await message.answer("No hay reporte semanal")
+    else:
+        # send message for each message in the list
+        message_to_send = f"Cantidad de dinero recaudado esta semana: {quickly_report_values['total_collected']}\nCantidad de dinero adeudado esta semana: {quickly_report_values['total_debt']}\nClientes con pagos pendientes esta semana: {quickly_report_values['clients_this_week']}"
+        await message.answer(message_to_send)
+
+@dp.message(Command('monthly_report'))
+async def monthly_report(message: Message):
+    quickly_report_values = quickstart.monthly_report()
+    if quickly_report_values == None or len(quickly_report_values) == 0:
+        await message.answer("No hay reporte mensual")
+    else:
+        # send message for each message in the list
+        message_to_send = f"Cantidad de dinero recaudado este mes: {quickly_report_values['total_collected']}\nCantidad de dinero adeudado este mes: {quickly_report_values['total_debt']}\nClientes con pagos pendientes este mes: {quickly_report_values['clients_this_week']}"
+        await message.answer(message_to_send)
+
+
+@dp.message(Command('help'))
+async def help(message: Message):
+    await message.answer("Comandos disponibles: \n /deblist - Lista de usuarios con pagos pendientes \n /total_collected - Total recaudado este mes \n /total_debt - Total adeudado este mes \n /clients_this_week - Clientes con pagos pendientes esta semana \n /weekly_report - Reporte semanal \n /monthly_report - Reporte mensual")
 
 
 @dp.message()

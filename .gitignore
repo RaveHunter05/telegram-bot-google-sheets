@@ -9,4 +9,6 @@ token.json
 /__pycache__/
 
 .venv
+.idea/
+.idea/*
 
